@@ -1,23 +1,56 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LoginView from "@/views/LoginView.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
+import ProjectsView from "@/views/ProjectsView.vue";
+import TasksView from "@/views/TasksView.vue";
+import {validateToken} from "@/middleware/authMiddleware";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      component: MainLayout,
+      beforeEnter: validateToken,
+      children: [
+        {
+          path: '/projects',
+          name: 'Projects',
+          component: ProjectsView,
+        },
+        {
+          path: '/tasks',
+          name: 'Tasks',
+          component: TasksView,
+        },
+      ]
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/login',
+      name: 'Login',
+      component: LoginView,
     },
   ],
 })
+
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    if (to.name === 'Login' && token) {
+      return next({ name: 'Projects' });
+    }
+
+    await validateToken(to, from, next);
+
+  }
+
+  if (to.name !== 'Login') {
+      return next({ name: 'Login' });
+  }
+
+  return next();
+
+});
 
 export default router

@@ -1,6 +1,7 @@
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
-  <h1 class="text-3xl text-red-500 font-bold underline">
-    Hello world!
-  </h1>
-  <el-divider></el-divider>
+  <RouterView />
 </template>
