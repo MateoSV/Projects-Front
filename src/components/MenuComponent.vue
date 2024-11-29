@@ -48,7 +48,7 @@ const handleSelect = async (key: string, keyPath: string[]) => {
       <el-icon>
         <Box/>
       </el-icon>
-      Items
+      Proyectos
     </el-menu-item>
     <el-menu-item index="2">
       <el-icon>
