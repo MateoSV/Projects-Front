@@ -1,8 +1,8 @@
 export interface ITask {
     id: number;
     name: string;
-    userId: number;
-    projectId: number;
+    project_id: number;
+    user_id: number | null;
     status: string;
-    dueDate: string;
+    due_date: string;
 }

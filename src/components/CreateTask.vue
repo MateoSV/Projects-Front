@@ -19,8 +19,8 @@ const dueDate = ref('')
 const handleCreate = async () => {
   const task = await createTask({
     name: name.value,
-    dueDate: dueDate.value,
-    projectId: props.projectId
+    due_date: dueDate.value,
+    project_id: props.projectId
   })
 
   emit('giveTask', task)

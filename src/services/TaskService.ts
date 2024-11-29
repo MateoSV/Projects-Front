@@ -10,12 +10,20 @@ export class TaskService {
         this.repository = new TaskRepository();
     }
 
+    async fetchTasks(): Promise<ITask[]> {
+        return await this.repository.fetchTasks();
+    }
+
     async createTask(data: Partial<ITask>) {
-        data.dueDate = formatDate(data.dueDate as string);
+        data.due_date = formatDate(data.due_date as string);
         return await this.repository.createTask(data);
     }
 
     async deleteTask(taskId: number) {
         await this.repository.deleteTask(taskId);
+    }
+
+    async updateTask(data: Partial<ITask>) {
+        return await this.repository.updateTask(data);
     }
 }

@@ -20,4 +20,8 @@ export class AuthService {
         await this.authRepository.logout();
 
     }
+
+    async getUsers(){
+        return await this.authRepository.getUsers();
+    }
 }

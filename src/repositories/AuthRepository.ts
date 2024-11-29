@@ -34,4 +34,19 @@ export class AuthRepository implements IAuthRepository {
             throw new Error(data.error);
         }
     }
+
+    async getUsers(){
+        const response = await fetch(`${this.apiUrl}/users`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.error);
+        }
+
+        return await response.json();
+    }
 }

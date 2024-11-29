@@ -59,7 +59,7 @@ const updateProject = (project: IProject) => {
       </el-table-column>
       <el-table-column align="right">
         <template #header>
-          <el-button size="small" type="success" @click="handleCreate(true)" class="mb-4">
+          <el-button size="small" type="success" @click="handleCreate(true)">
             Crear Proyecto
           </el-button>
         </template>
